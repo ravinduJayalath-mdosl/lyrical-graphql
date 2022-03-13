@@ -6,7 +6,8 @@ import query from '../queries/fetchSongs';
 
 class SongList extends Component {
     onSongDelete(id) {
-        this.props.mutate({ variables: { id } });
+        this.props.mutate({ variables: { id } })
+            .then(() => this.props.data.refetch()); // Re-execute the queries which are associated with SongList component. `graphql(query)` in here.
     }
 
     renderSongs() {
